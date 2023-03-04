@@ -29,7 +29,6 @@ import com.vitg.repository.BatchRepository;
 import com.vitg.service.BatchService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/batch")
 public class BatchController {
 	

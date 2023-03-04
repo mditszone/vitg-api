@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -33,16 +34,25 @@ public class Batch  implements Serializable{
 	private String name;
 
 	@Column(name = "start_date")
-	private LocalDate startDate;
+	private String startDate;
 
 	@Column(name = "end_date")
-	private LocalDate endDate;
+	private String endDate;
 
 	@Column(name = "start_time")
-	private LocalTime startTime;
+	private String startTime;
 
 	@Column(name = "end_time")
-	private LocalTime endTime;
+	private String endTime;
+
+	@Column(name = "fee")
+	private String fee;
+
+	@Column(name = "duration")
+	private String duration;
+
+	@Column(name = "status")
+	private String status;
 
 	@Column(name = "organizer")
 	private String organizer;
@@ -51,5 +61,12 @@ public class Batch  implements Serializable{
 	@JoinColumn(name = "trainerCourse_id", referencedColumnName = "id")
 	private TrainerCourse trainerCourse;
 
+	@OneToOne( targetEntity = Trainer.class)
+	@JoinColumn(name = "trainer_id", referencedColumnName = "id")
+	private TrainerCourse trainerId;
+
+	@OneToOne( targetEntity = Course.class)
+	@JoinColumn(name = "course_id", referencedColumnName = "id")
+	private TrainerCourse courseId;
 
 }

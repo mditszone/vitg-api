@@ -372,7 +372,9 @@ public class AuthController {
 					return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
 
 				}
-				if(role.getRoleName().equals("ADMIN")||role.getRoleName().equals("MANAGER") ||role.getRoleName().equals("ACCOUNTANT")|| role.getRoleName().equals("ORGANIZER") || role.getRoleName().equals("GUEST")) { 
+				if(role.getRoleName().equals("ADMIN")||role.getRoleName().equals("MANAGER") ||
+						role.getRoleName().equals("ACCOUNTANT")|| role.getRoleName().equals("ORGANIZER") ||
+						role.getRoleName().equals("GUEST") || role.getRoleName().equals("SUPPORT_ENGINEER")) {
 					System.out.println("test");
 					user.setFailedAttempt(0);
 					userRepository.save(user);

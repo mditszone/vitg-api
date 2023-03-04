@@ -33,6 +33,7 @@ public class Course  implements Serializable{
 	private boolean status;
 
 	@Column(name = "description")
+	@Lob
 	private String description;
 
 	@OneToMany(mappedBy = "course")

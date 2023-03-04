@@ -29,11 +29,12 @@ dependencies {
 	implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.367'
 	implementation group: 'javax.validation', name: 'validation-api', version: '1.0.0.GA'
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' 
 }
 
 tasks.named('test') {

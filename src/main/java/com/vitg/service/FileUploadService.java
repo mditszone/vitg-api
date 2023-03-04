@@ -22,7 +22,6 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 public interface FileUploadService {
-	public void uploadFile(String fileName, MultipartFile file);
-	//public void save(MultipartFile file);
+	public void uploadFiles( MultipartFile file,String path,String folderName);
 	
 }

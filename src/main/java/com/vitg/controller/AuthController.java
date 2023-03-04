@@ -205,7 +205,7 @@ public class AuthController {
 			user.setPhoneNumber(phoneVerificationDTO.getPhoneNumber());
 			user.setLockTime(null);
 			user.setAccountNonLocked(true);
-			Role role= roleRepository.findByroleName("GUEST");
+			Role role= roleRepository.findByroleName("TRAINER");
 			user.setRole(role);
 			userService.saveUser(user);
 

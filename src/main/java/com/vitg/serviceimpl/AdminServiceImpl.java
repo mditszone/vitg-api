@@ -53,7 +53,7 @@ public class AdminServiceImpl implements AdminService{
 
 	public List<RoleDTO> getAllRoles(){
 		List<Role>  roleList=roleRepository.findAll();
-
+		System.out.println(roleList);
 		List<RoleDTO> roleDTOList=new ArrayList<>();
 
 		for(Role role: roleList) {

@@ -71,6 +71,7 @@ public class BatchServiceImpl implements BatchService{
 		List<Batch>  batchList = batchRepository.findAll();
 		List<BatchDTO> batchDTOList=new ArrayList<>();
 		for(Batch batch:batchList) {
+			//System.out.println(batch);
 			BatchDTO batchDTO = modelMapper.map(batch, BatchDTO.class);
 			batchDTOList.add(batchDTO);
 		}
@@ -86,12 +87,11 @@ public class BatchServiceImpl implements BatchService{
 			subCourseDTO.setName(subCourse.getName());
 		}
 
-
-
-		Batch batch=modelMapper.map(batchDTO, Batch.class);
-		Batch batchResponse=batchRepository.save(batch);
+		Batch batch = modelMapper.map(batchDTO, Batch.class);
+		Batch batchResponse = batchRepository.save(batch);
 		BatchDTO batchDTOResponse=modelMapper.map(batchResponse, BatchDTO.class);
 		return batchDTOResponse;
+
 	}
 
 	@Override

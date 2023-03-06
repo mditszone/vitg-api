@@ -9,4 +9,8 @@ public interface StaffService {
 	public StaffDTO getStaffById(int id);
 	public StaffDTO updateStaff(StaffDTO staffDTO);
 	public List<StaffDTO> getAllStaff();
+
+	public List<StaffDTO> getAllOrganizers();
+
+
 }

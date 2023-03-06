@@ -28,9 +28,9 @@ public class AwsSesServiceImpl implements AwsSesService {
 				new MessageAttributeValue().withStringValue("Transactional").withDataType("String"));
 		PublishRequest request = new PublishRequest();
 
-		System.out.println("publish message");
-		System.out.println(message);
-		System.out.println(phonenumber);
+//		System.out.println("publish message");
+//		System.out.println(message);
+//		System.out.println(phonenumber);
 
 
 		request.withMessage(message) 

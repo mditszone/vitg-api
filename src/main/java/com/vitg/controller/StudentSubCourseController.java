@@ -42,16 +42,6 @@ public class StudentSubCourseController {
 		return new ResponseEntity<>(responseDTO, HttpStatus.OK);
 	}
 	
-//	@GetMapping("/by_subCourse_id_and_student_id")
-//	public ResponseEntity<SubCourseDTO> getStudentIdBySubCourseId(@RequestParam("studentId") int studentId, @RequestParam("subCourseId") int subCourseId) {
-//		SubCourseDTO subCourseDTO = studentSubCourseService.getSubCoursesByStudentIdAndSubCourseId(studentId, subCourseId);
-//		
-//		if (subCourseDTO == null) {
-//			throw new NotAuthorizedException("student has no access to material");
-//		}
-//		return new ResponseEntity<>(subCourseDTO, HttpStatus.OK);
-//	}
-	
 	@GetMapping("/by_subCourse_id_and_student_id")
 	public ResponseEntity<StudentSubCourseDTO> getStudentIdBySubCourseId(@RequestParam("studentId") int studentId, @RequestParam("subCourseId") int subCourseId) {
 		StudentSubCourseDTO studentSubCourseDTO = studentSubCourseService.getSubCoursesByStudentIdAndSubCourseId(studentId, subCourseId);

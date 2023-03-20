@@ -224,8 +224,6 @@ public class FileUploadServiceImpl implements FileUploadService {
 	//Delete File
 	public String deleteFile(final String fileName) {
 		s3client.deleteObject(bucketName, fileName);
-		System.out.println(bucketName);
-		System.out.println(fileName);
 		return "Deleted File: " + fileName;
 	}
 

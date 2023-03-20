@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vitg.dto.FacultyTopicListResponseDTO;
 import com.vitg.dto.StudentTopicListResponseDTO;
 import com.vitg.dto.SubCourseDTO;
 import com.vitg.dto.TopicDTO;
@@ -87,6 +88,11 @@ public class TopicController {
 	@GetMapping("/getTopicListByStudentId")
 	public ResponseEntity<List<StudentTopicListResponseDTO>> getTopicListByStudentId(@RequestParam (value = "studentId") int studentId,@RequestParam (value = "subCourseId") int subCourseId){
 		List<StudentTopicListResponseDTO> response = topicService.getTopicListByStudentId(studentId,subCourseId);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
+	@GetMapping("/getTopicListByStudenFacultytId")
+	public ResponseEntity<List<FacultyTopicListResponseDTO>> getTopicListByFacultyId(@RequestParam (value = "facultyId") int facultyId,@RequestParam (value = "subCourseId") int subCourseId){
+		List<FacultyTopicListResponseDTO> response = topicService.getTopicListByFacultyId(facultyId,subCourseId);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 

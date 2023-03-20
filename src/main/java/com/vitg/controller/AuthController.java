@@ -34,6 +34,7 @@ import com.vitg.exception.LockedException;
 import com.vitg.exception.OTPException;
 import com.vitg.exception.RecordNotFoundException;
 import com.vitg.exception.ResourceAlreadyExistsException;
+import com.vitg.repository.FacultyRepository;
 import com.vitg.repository.RoleRepository;
 import com.vitg.repository.StaffRepository;
 import com.vitg.repository.StudentRepository;
@@ -86,6 +87,9 @@ public class AuthController {
 
 	@Autowired 
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private FacultyRepository facultyRepository;
 
 	@Autowired
 	private ModelMapper modelMapper;
@@ -269,7 +273,7 @@ public class AuthController {
 				user.setPhoneNumber(phoneVerificationDTO.getPhoneNumber());
 				user.setLockTime(null);
 				user.setAccountNonLocked(true);
-				Role role= roleRepository.findByroleName("GUEST");
+				Role role= roleRepository.findByroleName("STUDENT");
 				user.setRole(role);
 				userService.saveUser(user);
 

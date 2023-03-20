@@ -65,7 +65,7 @@ public class OTPServiceImpl  implements OTPService  {
 	}
 
 	public void sendOTP(String otp,String phoneNumber){
-		String otpStr = " RUN Wheelz App : " + otp ;
+		String otpStr = " Vitg App : " + otp ;
 		System.out.println("inside send otp " + otp);
 		//awsSesService.sendSMSMessage(otpStr,phoneNumber);
 	}

@@ -147,6 +147,7 @@ public class FileUploadController {
 	//Delete File
 	@GetMapping(value = "/delete")
 	public ResponseEntity<String> deleteFile(@RequestParam("fileName") String fileName) {
+		System.out.println("TEST");
 		return new ResponseEntity<>(fileUploadServiceImpl.deleteFile(fileName), HttpStatus.OK);
 	}
 }

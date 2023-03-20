@@ -15,9 +15,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vitg.dto.FacultyTopicListResponseDTO;
 import com.vitg.dto.StudentTopicListResponseDTO;
 import com.vitg.dto.TopicDTO;
 import com.vitg.entity.Topic;
+import com.vitg.repository.FacultySubCourseRepository;
 import com.vitg.repository.StudentSubCourseRepository;
 import com.vitg.repository.SubCourseRepository;
 import com.vitg.repository.TopicRepository;
@@ -39,6 +41,10 @@ public  class TopicServiceImpl implements TopicService{
 
 	@Autowired
 	private StudentSubCourseRepository studentSubCourseRepository;
+	
+	
+	@Autowired
+	private FacultySubCourseRepository facultySubCourseRepository;
 
 	@Transactional
 	public  TopicDTO createTopic(TopicDTO topicDTO) {
@@ -106,6 +112,18 @@ public  class TopicServiceImpl implements TopicService{
 		for(Map<String,Object> item : listOfTopics) {
 			response.add(new StudentTopicListResponseDTO((int)item.get("id"),(String)item.get("name"),(int)item.get("sub_course_id"), 
 					(int)item.get("student_id")));
+		}
+		return response;
+	}
+	@Override
+	public List<FacultyTopicListResponseDTO> getTopicListByFacultyId(int facultyId,int subCourseId) {
+		List<Map<String, Object>> listOfTopics = facultySubCourseRepository.findTopicListByFacultyId(facultyId, subCourseId);
+		
+		List<FacultyTopicListResponseDTO> response = new ArrayList<>();
+		
+		for(Map<String,Object> item : listOfTopics) {
+			response.add(new FacultyTopicListResponseDTO((int)item.get("id"),(String)item.get("name"),(int)item.get("sub_course_id"), 
+					(int)item.get("faculty_id")));
 		}
 		return response;
 	}

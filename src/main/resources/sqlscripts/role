@@ -6,3 +6,4 @@ INSERT INTO `vitgdb`.`role` (`id`, `role_name`) VALUES ('5', 'TRAINER');
 INSERT INTO `vitgdb`.`role` (`id`, `role_name`) VALUES ('6', 'STUDENT');
 INSERT INTO `vitgdb`.`role` (`id`, `role_name`) VALUES ('7', 'GUEST');
 INSERT INTO `vitgdb`.`role` (`id`, `role_name`) VALUES ('8', 'SUPPORT_ENGINEER');
+INSERT INTO `vitgdb`.`role` (`id`, `role_name`) VALUES ('9', 'FACULTY');

@@ -39,6 +39,9 @@ public class User implements Serializable {
 	@Column(name = "phone_number",unique = true)
 	private String phoneNumber;
 
+	@Column(name = "password")
+	private String password;
+
 	@Column(name = "account_non_locked")
 	private boolean accountNonLocked;
 

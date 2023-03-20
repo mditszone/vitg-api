@@ -6,6 +6,7 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import com.vitg.config.CustomPropertyConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.mail.simplemail.SimpleEmailServiceJavaMailSender;
 
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 @Configuration
 public class MailConfig {
+
+    @Value("${cloud.aws.credentials.access-key}")
+    private String awsId;
+
+    @Value("${cloud.aws.credentials.secret-key}")
+    private String awsKey;
+
+    @Value("${cloud.aws.region.static}")
+    private String region;
 
     private CustomPropertyConfig customPropertyConfig;
 
@@ -28,7 +38,7 @@ public class MailConfig {
                 .withCredentials(
                         new AWSStaticCredentialsProvider(
                                 new BasicAWSCredentials(
-                                        customPropertyConfig.awsAccessKey, customPropertyConfig.awsSecretKey)))
+                                        awsId, awsKey)))
                 .withRegion(Regions.AP_SOUTH_1)
                 .build();
     }

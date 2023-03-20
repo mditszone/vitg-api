@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "batch")
-public class Batch  implements Serializable{
+public class Batch extends AbstractAuditable implements Serializable{
 
 	private static final long serialVersionUID = 4130758031076098234L;
 

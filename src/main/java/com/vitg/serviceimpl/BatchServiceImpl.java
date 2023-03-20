@@ -7,18 +7,14 @@ import java.util.ArrayList;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.vitg.dto.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vitg.dto.BatchDTO;
-import com.vitg.dto.CourseDTO;
-import com.vitg.dto.SubCourseDTO;
-import com.vitg.dto.SubTopicDTO;
-import com.vitg.dto.TopicDTO;
-import com.vitg.dto.TrainerCourseDTO;
 import com.vitg.entity.Batch;
 import com.vitg.entity.Course;
 import com.vitg.entity.SubCourse;
@@ -74,6 +70,23 @@ public class BatchServiceImpl implements BatchService{
 			//System.out.println(batch);
 			BatchDTO batchDTO = modelMapper.map(batch, BatchDTO.class);
 			batchDTOList.add(batchDTO);
+		}
+		return batchDTOList;
+	}
+
+	@Override
+	public List<BatchTableInfo> getAllBatchesTableInfo() {
+		List<Batch>  batchList = batchRepository.findAll();
+		List<BatchTableInfo> batchDTOList=new ArrayList<>();
+
+		for(Batch batch: batchList) {
+			BatchTableInfo batchTableInfo = new BatchTableInfo();
+			batchTableInfo.setEndDate(batch.getEndDate());
+			batchTableInfo.setStartDate(batch.getStartDate());
+			batchTableInfo.setTrainerName(batch.getTrainerCourse().getTrainer().getName());
+			batchTableInfo.setId(batch.getId());
+			batchTableInfo.setName(batch.getName());
+			batchDTOList.add(batchTableInfo);
 		}
 		return batchDTOList;
 	}

@@ -66,7 +66,7 @@ public class EnquiresServiceImpl implements EnquiresService {
         Map<String, Object> model = new HashMap<>();
         model.put("message", message);
         mail.setModel(model);
-
+        System.out.println("test");
         try {
             boolean isSend = emailService.sendEmail(mail);
             if(!isSend) responseDTO.getFailedEmailList().add(to);

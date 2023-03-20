@@ -11,10 +11,5 @@ public class CustomPropertyConfig {
     @Value("${mailFrom}")
     public String mailFrom;
 
-    @Value("${awsAccessKey}")
-    public String awsAccessKey;
-
-    @Value("${awsSecretKey}")
-    public String awsSecretKey;
 
 }

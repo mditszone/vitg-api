@@ -52,6 +52,7 @@ public  class SubCourseServiceImpl implements  SubCourseService{
 		List<SubCourse>  subCourseList=subCourseRepository.findAll();
 		List<SubCourseDTO> subCourseDTOList=new ArrayList<>();
 		for(SubCourse subCourse:subCourseList) {
+			System.out.println(subCourse.getId());
 			SubCourseDTO subCourseDTO=modelMapper.map(subCourse, SubCourseDTO.class);
 			subCourseDTOList.add(subCourseDTO);
 		}

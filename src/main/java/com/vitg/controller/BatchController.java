@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.vitg.dto.BatchTableInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,6 @@ import com.vitg.repository.BatchRepository;
 import com.vitg.service.BatchService;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/batch")
 public class BatchController {
 	
@@ -54,6 +54,11 @@ public class BatchController {
 	@GetMapping("/AllBatches")
 	public List<BatchDTO> getAllBatches() {
 		return batchService.getAllBatches();
+	}
+
+	@GetMapping("/AllBatchTableInfo")
+	public List<BatchTableInfo> getAllBatchTableInfo() {
+		return batchService.getAllBatchesTableInfo();
 	}
 	
 	@PutMapping("/editBatch")

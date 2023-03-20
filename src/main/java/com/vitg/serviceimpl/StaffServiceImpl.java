@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,16 @@ public class StaffServiceImpl implements StaffService{
 			staffDTOList.add(staffDTO);
 		}
 		return staffDTOList;
+	}
+
+	@Override
+	public List<StaffDTO> getAllOrganizers() {
+		System.out.println("test1");
+		return staffRepository.findAll()
+				.stream()
+				.filter(item -> item.getRole().getId() == 4)
+				.map(item -> modelMapper.map(item, StaffDTO.class))
+				.collect(Collectors.toList());
 	}
 
 	public StaffDTO updateStaff(StaffDTO staffDTO) {

@@ -97,6 +97,13 @@ public class StaffController {
 		return staffService.getAllStaff();
 	}
 
+
+	@GetMapping("/getAllOrganizers")
+	public List<StaffDTO> getAllOrganizers() {
+		System.out.println("test");
+		return staffService.getAllOrganizers();
+	}
+
 //	@GetMapping("/sendNotification")
 //	public ResponseEntity<StaffDTO> sendNotfication(@RequestParam String deviceToken, @RequestParam String requestId) {
 //		System.out.println(deviceToken);

@@ -3,10 +3,16 @@ package com.vitg.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.vitg.dto.*;
+import com.vitg.jwt.JwtProvider;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,14 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vitg.dto.OTPResponseDTO;
-import com.vitg.dto.PhoneVerificationDTO;
-import com.vitg.dto.RoleDTO;
-import com.vitg.dto.StaffDTO;
-import com.vitg.dto.StudentDTO;
-import com.vitg.dto.StudentSubCourseDTO;
-import com.vitg.dto.TrainerDTO;
-import com.vitg.dto.UserDTO;
 import com.vitg.entity.PhoneVerification;
 import com.vitg.entity.User;
 import com.vitg.entity.Role;
@@ -47,6 +45,8 @@ import com.vitg.service.StudentSubCourseService;
 import com.vitg.service.TrainerService;
 import com.vitg.service.UserService;
 import com.vitg.serviceimpl.UserServiceImpl;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -93,6 +93,13 @@ public class AuthController {
 
 	@Autowired
 	private ModelMapper modelMapper;
+
+	@Autowired
+	AuthenticationManager authenticationManager;
+
+
+	@Autowired
+	JwtProvider jwtProvider;
 
 
 	//Admin will register staff : Send OTP functionality
@@ -346,12 +353,14 @@ public class AuthController {
 	public ResponseEntity<UserDTO> verifyOtp(@RequestBody PhoneVerificationDTO phoneVerificationDTO ) {
 
 		boolean verified =otpService.verifyOtp(phoneVerificationDTO);
-		System.out.println("test1");
+
 		if(verified)  {
-			System.out.println("test2");
+
+
+
 			if(userRepository.existsByPhoneNumber(phoneVerificationDTO.getPhoneNumber())){
 				User user = userRepository.findByPhoneNumber(phoneVerificationDTO.getPhoneNumber());
-
+				UserDTO userDTO = authenticateUser(user);
 				Role role = user.getRole();
 
 				if(role.getRoleName().equals("TRAINER")) {
@@ -360,7 +369,6 @@ public class AuthController {
 					Trainer trainer=trainerRepository.findByPhoneNumber(phoneVerificationDTO.getPhoneNumber());
 					TrainerDTO trainerDTOResponse=modelMapper.map(trainer, TrainerDTO.class);
 
-					UserDTO userDTO= new UserDTO();
 					userDTO.setTrainerDTO(trainerDTOResponse);
 					return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
 				}
@@ -371,19 +379,20 @@ public class AuthController {
 					Student student=studentRepository.findByPhoneNumber(phoneVerificationDTO.getPhoneNumber());
 					StudentDTO studentDTOResponse=modelMapper.map(student, StudentDTO.class);
 					System.out.println(studentDTOResponse);
-					UserDTO userDTO= new UserDTO();
+
 					userDTO.setStudentDTO(studentDTOResponse);
 					return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
 
 				}
-				if(role.getRoleName().equals("ADMIN")||role.getRoleName().equals("MANAGER") ||role.getRoleName().equals("ACCOUNTANT")|| role.getRoleName().equals("ORGANIZER") || role.getRoleName().equals("GUEST")) { 
+				if(role.getRoleName().equals("ADMIN")||role.getRoleName().equals("MANAGER") ||
+						role.getRoleName().equals("ACCOUNTANT")|| role.getRoleName().equals("ORGANIZER") ||
+						role.getRoleName().equals("GUEST") || role.getRoleName().equals("SUPPORT_ENGINEER")) {
 					System.out.println("test");
 					user.setFailedAttempt(0);
 					userRepository.save(user);
 					Staff staff = staffRepository.findByPhoneNumber(phoneVerificationDTO.getPhoneNumber());
 					StaffDTO staffDTOResponse = modelMapper.map(staff, StaffDTO.class);
 
-					UserDTO userDTO= new UserDTO();
 					userDTO.setVitgStaffDTO(staffDTOResponse);
 					return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
 
@@ -421,5 +430,25 @@ public class AuthController {
 			}
 		}
 		return null;
+	}
+
+
+
+	private UserDTO authenticateUser(User user) {
+
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(user.getPhoneNumber(), user.getPassword()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
+		String jwt = jwtProvider.generateJwtToken(authentication);
+
+		UserPrinciple  userPrinciple=(UserPrinciple) authentication.getPrincipal();
+
+		UserDTO userDTO = new UserDTO();
+		userDTO.setToken(jwt);
+
+		return userDTO;
+
 	}
 }

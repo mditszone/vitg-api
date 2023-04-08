@@ -1,5 +1,4 @@
 package com.vitg.config;
-;
 
 import com.vitg.jwt.JwtAuthEntryPoint;
 import com.vitg.jwt.JwtAuthTokenFilter;
@@ -69,7 +68,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/slider/**").permitAll()
-                //.antMatchers("/api/slider/**").permitAll()
+                .antMatchers("/api/faq/**").permitAll()
+                .antMatchers("/api/course/**").permitAll()
+                .antMatchers("/api/subCourse/**").permitAll()
+                .antMatchers("/api/topic/**").permitAll()
+                .antMatchers("/api/subTopic/**").permitAll()
+                .antMatchers("/api/subTopicConcept/**").permitAll()
+                .antMatchers("/api/studentSubCourse/**").permitAll()
+                .antMatchers("/api/faculty/getAllFaculty/**").permitAll()
+                .antMatchers("/api/faculty/facultyLogin/**").permitAll()
+                .antMatchers("/api/faculty/facultyLogin/verifyOtp/**").permitAll()
+                .antMatchers("/api/route53/**").permitAll()
+                .antMatchers("/api/fbIntegration/**").permitAll()
                 .antMatchers("/js/**", "/css/**", "/img/**", "/webjars/**", "/html/**", "/images/**",
                         "/swagger-resources/**", "/swagger-resource/**")
                 .permitAll().antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()

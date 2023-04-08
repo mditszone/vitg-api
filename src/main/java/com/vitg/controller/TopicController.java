@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vitg.dto.FacultyTopicListResponseDTO;
+import com.vitg.dto.StudentSubCourseAccessedData;
 import com.vitg.dto.StudentTopicListResponseDTO;
 import com.vitg.dto.SubCourseDTO;
 import com.vitg.dto.TopicDTO;
@@ -79,11 +80,11 @@ public class TopicController {
 		return new ResponseEntity<>(topicDTOResponse, HttpStatus.OK);
 	}
 
-//	@GetMapping("/getTopicListByStudentIdSubCourseId")
-//	public ResponseEntity<List<TopicDTO>> getTopicListByStudentIdSubCourseId(@RequestParam("studentId") int studentId,@RequestParam("subCourseId")int subCourseId){
-//		List<TopicDTO> topicDTOResponse = topicService.getTopicListByStudentIdSubCourseId(studentId,  subCourseId);
-//		return new ResponseEntity<>(topicDTOResponse, HttpStatus.OK);
-//	}
+	//	@GetMapping("/getTopicListByStudentIdSubCourseId")
+	//	public ResponseEntity<List<TopicDTO>> getTopicListByStudentIdSubCourseId(@RequestParam("studentId") int studentId,@RequestParam("subCourseId")int subCourseId){
+	//		List<TopicDTO> topicDTOResponse = topicService.getTopicListByStudentIdSubCourseId(studentId,  subCourseId);
+	//		return new ResponseEntity<>(topicDTOResponse, HttpStatus.OK);
+	//	}
 
 	@GetMapping("/getTopicListByStudentId")
 	public ResponseEntity<List<StudentTopicListResponseDTO>> getTopicListByStudentId(@RequestParam (value = "studentId") int studentId,@RequestParam (value = "subCourseId") int subCourseId){
@@ -95,5 +96,8 @@ public class TopicController {
 		List<FacultyTopicListResponseDTO> response = topicService.getTopicListByFacultyId(facultyId,subCourseId);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
-
+	@GetMapping("/getTopicsListByStudentId/{studentId}")
+	public ResponseEntity<List<StudentSubCourseAccessedData>> getTopicsListByStudentId(@PathVariable (value = "studentId") int studentId){
+		List<StudentSubCourseAccessedData> response = topicService.getTopicsListByStudentId(studentId);
+		return new ResponseEntity<>(response,HttpStatus.OK);}
 }

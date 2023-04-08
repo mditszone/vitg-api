@@ -4,6 +4,7 @@ package com.vitg.service;
 import java.util.List;
 
 import com.vitg.dto.FacultyTopicListResponseDTO;
+import com.vitg.dto.StudentSubCourseAccessedData;
 import com.vitg.dto.StudentTopicListResponseDTO;
 import com.vitg.dto.SubCourseDTO;
 import com.vitg.dto.TopicDTO;
@@ -19,5 +20,6 @@ public interface TopicService {
 	//public List<TopicDTO> getTopicListByStudentIdSubCourseId(int studentId,int subCourseId);
 	public List<StudentTopicListResponseDTO> getTopicListByStudentId(int studentId,int subCourseId);
 	public List<FacultyTopicListResponseDTO> getTopicListByFacultyId(int facultyId,int subCourseId);
+	public List<StudentSubCourseAccessedData> getTopicsListByStudentId(int studentId);
 
 }

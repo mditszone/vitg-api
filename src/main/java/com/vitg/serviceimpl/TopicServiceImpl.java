@@ -152,5 +152,25 @@ public  class TopicServiceImpl implements TopicService{
 		} 
 		return response;
 	}
+	
+	@Override
+	public List<StudentSubCourseAccessedData> getTopicsListByStudentId2(int subCourseId, int studentId) {
+		List<Map<String, Object>> listOfTopics = studentSubCourseRepository.findTopicListByStudentId(studentId, subCourseId);
+
+		List<StudentSubCourseAccessedData> response = new ArrayList<>();
+
+		for(Map<String,Object> item : listOfTopics) {
+			StudentSubCourseAccessedData tmp = new StudentSubCourseAccessedData();
+			tmp.setTopic((String)item.get("name"));
+			List<StudentSubTopicData> subTopicList = subTopicRepository.findAll()
+					.stream()
+					.filter(val -> val.getTopic().getId() == (int)item.get("id"))
+					.map(val -> modelMapper.map(val, StudentSubTopicData.class))
+					.collect(Collectors.toList());
+			tmp.setSubTopicNameList(subTopicList);
+			response.add(tmp);
+		}
+		return response;
+	}
 
 }

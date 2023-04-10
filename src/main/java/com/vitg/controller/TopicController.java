@@ -91,6 +91,11 @@ public class TopicController {
 		List<StudentTopicListResponseDTO> response = topicService.getTopicListByStudentId(studentId,subCourseId);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
+	@GetMapping("/getTopicsListByStudentId2")
+	public ResponseEntity<List<StudentSubCourseAccessedData>> getTopicsListByStudentId2(@RequestParam (value = "subCourseId") int subCourseId, @RequestParam (value = "studentId") int studentId){
+		List<StudentSubCourseAccessedData> response = topicService.getTopicsListByStudentId2(subCourseId, studentId);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
 	@GetMapping("/getTopicListByStudenFacultytId")
 	public ResponseEntity<List<FacultyTopicListResponseDTO>> getTopicListByFacultyId(@RequestParam (value = "facultyId") int facultyId,@RequestParam (value = "subCourseId") int subCourseId){
 		List<FacultyTopicListResponseDTO> response = topicService.getTopicListByFacultyId(facultyId,subCourseId);

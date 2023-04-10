@@ -21,5 +21,6 @@ public interface TopicService {
 	public List<StudentTopicListResponseDTO> getTopicListByStudentId(int studentId,int subCourseId);
 	public List<FacultyTopicListResponseDTO> getTopicListByFacultyId(int facultyId,int subCourseId);
 	public List<StudentSubCourseAccessedData> getTopicsListByStudentId(int studentId);
+	public List<StudentSubCourseAccessedData> getTopicsListByStudentId2(int subCourseId, int studentId);
 
 }

@@ -80,6 +80,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/faculty/facultyLogin/verifyOtp/**").permitAll()
                 .antMatchers("/api/route53/**").permitAll()
                 .antMatchers("/api/fbIntegration/**").permitAll()
+                .antMatchers("/api/batch/**").permitAll()
+                .antMatchers("/api/student/editStudent").permitAll()
                 .antMatchers("/js/**", "/css/**", "/img/**", "/webjars/**", "/html/**", "/images/**",
                         "/swagger-resources/**", "/swagger-resource/**")
                 .permitAll().antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()

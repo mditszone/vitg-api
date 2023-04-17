@@ -98,7 +98,7 @@ public class FacultyController {
 		if(verified) {
 			FacultyDTO facultyDTOResponse = facultyService.getFacultyById(facultyDTO.getId()); 
 			facultyDTOResponse.setFacultySubCourseIdList(facultySubCourseService.getSubCoursesByFacultyId(facultyDTO.getId()).stream().map(item -> item.getSubCourseId()).collect(Collectors.toList()));
-
+			facultyDTOResponse.setRole("Faculty");
 			System.out.println("facultyDTOResponse" +facultyDTOResponse);
 			return new ResponseEntity<>(facultyDTOResponse, HttpStatus.CREATED);
 

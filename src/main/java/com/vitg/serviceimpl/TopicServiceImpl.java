@@ -16,6 +16,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vitg.controller.FacultySubTopicData;
+import com.vitg.dto.FacultySubCourseAccessedData;
 import com.vitg.dto.FacultyTopicListResponseDTO;
 import com.vitg.dto.StudentSubCourseAccessedData;
 import com.vitg.dto.StudentSubTopicData;
@@ -166,6 +168,26 @@ public  class TopicServiceImpl implements TopicService{
 					.stream()
 					.filter(val -> val.getTopic().getId() == (int)item.get("id"))
 					.map(val -> modelMapper.map(val, StudentSubTopicData.class))
+					.collect(Collectors.toList());
+			tmp.setSubTopicNameList(subTopicList);
+			response.add(tmp);
+		}
+		return response;
+	}
+
+	@Override
+	public List<FacultySubCourseAccessedData> getTopicsListByFacultyId2(int subCourseId, int facultyId) {
+		List<Map<String, Object>> listOfTopics = facultySubCourseRepository.findTopicListByFacultyId(facultyId, subCourseId);
+
+		List<FacultySubCourseAccessedData> response = new ArrayList<>();
+
+		for(Map<String,Object> item : listOfTopics) {
+			FacultySubCourseAccessedData tmp = new FacultySubCourseAccessedData();
+			tmp.setTopic((String)item.get("name"));
+			List<FacultySubTopicData> subTopicList = subTopicRepository.findAll()
+					.stream()
+					.filter(val -> val.getTopic().getId() == (int)item.get("id"))
+					.map(val -> modelMapper.map(val, FacultySubTopicData.class))
 					.collect(Collectors.toList());
 			tmp.setSubTopicNameList(subTopicList);
 			response.add(tmp);

@@ -2,6 +2,8 @@ package com.vitg.dto;
 
 import java.util.List;
 
+import com.vitg.entity.Role;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,6 @@ public class StudentDTO {
 	private boolean registrationStatus;
 	private byte[] image;
 	private List<Integer> studentSubCourseIdList;
+	private String role;
+	private String password;
 }

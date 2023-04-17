@@ -57,6 +57,7 @@ public class StudentController {
 		}
 		
 		User user = userRepository.findByPhoneNumber(studentDTO.getPhoneNumber());
+		user.setPassword(studentDTO.getPassword());
 		userRepository.save(user);
 		
 		studentDTO.setRegistrationStatus(true);

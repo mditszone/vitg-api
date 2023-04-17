@@ -273,7 +273,7 @@ public class AuthController {
 
 				StudentDTO studentDTO = studentService.findByPhoneNumber(phoneVerificationDTO.getPhoneNumber()); 
 				studentDTO.setStudentSubCourseIdList(studentSubCourseService.getSubCoursesByStudentId(studentDTO.getId()).stream().map(item -> item.getSubCourseId()).collect(Collectors.toList()));
-
+				studentDTO.setRole("STUDENT");
 				return new ResponseEntity<>(studentDTO, HttpStatus.CREATED);
 			} else {
 				User user= new User();
@@ -291,6 +291,8 @@ public class AuthController {
 				studentDTO.setPhoneNumber(userDTO.getPhoneNumber());
 				studentDTO.setRegistrationStatus(false);
 				StudentDTO studentDTOResponse=studentService.updateStudent(studentDTO);
+				studentDTOResponse.setRole("STUDENT");
+				System.out.println(studentDTOResponse);
 
 				return new ResponseEntity<>(studentDTOResponse, HttpStatus.CREATED);
 			}

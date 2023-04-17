@@ -10,4 +10,5 @@ public class FacultyDTO {
 	private String userName;
 	private int pin;
 	private List<Integer> facultySubCourseIdList;
+	private String role;
 }

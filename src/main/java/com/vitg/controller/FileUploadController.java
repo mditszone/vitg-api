@@ -139,6 +139,10 @@ public class FileUploadController {
 			return MediaType.IMAGE_PNG;
 		case "jpg":
 			return MediaType.IMAGE_JPEG;
+		case "pdf":
+			return MediaType.APPLICATION_PDF;
+		case "xlsx":
+			return MediaType.APPLICATION_XML;
 		default:
 			return MediaType.APPLICATION_OCTET_STREAM;
 		}

@@ -68,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/slider/**").permitAll()
+                .antMatchers("/api/file/**").permitAll()
                 .antMatchers("/api/faq/**").permitAll()
                 .antMatchers("/api/course/**").permitAll()
                 .antMatchers("/api/subCourse/**").permitAll()
@@ -82,6 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/fbIntegration/**").permitAll()
                 .antMatchers("/api/batch/**").permitAll()
                 .antMatchers("/api/student/editStudent").permitAll()
+                .antMatchers("/api/admin/getCoursesList/**").permitAll()
                 .antMatchers("/js/**", "/css/**", "/img/**", "/webjars/**", "/html/**", "/images/**",
                         "/swagger-resources/**", "/swagger-resource/**")
                 .permitAll().antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
